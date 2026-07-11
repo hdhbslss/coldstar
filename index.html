@@ -14,9 +14,25 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Minecraft 載入畫面 -->
+    <div class="mc-loading" id="mcLoading">
+        <div class="mc-loading-content">
+            <div class="mc-dirt-block">
+                <div class="mc-dirt-face mc-dirt-top"></div>
+                <div class="mc-dirt-face mc-dirt-front"></div>
+                <div class="mc-dirt-face mc-dirt-right"></div>
+            </div>
+            <p class="mc-loading-text">Loading...</p>
+            <div class="mc-progress-bar">
+                <div class="mc-progress-fill" id="mcProgressFill"></div>
+            </div>
+            <p class="mc-loading-percent" id="mcPercent">0%</p>
+        </div>
+    </div>
+
     <canvas id="particleCanvas"></canvas>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
@@ -44,6 +60,8 @@
                 <p class="bio-text" id="bioText4">除了程式開發之外，我也十分重視介面設計與使用者體驗，希望每個作品不只是功能完整，更能帶來流暢、直覺且舒適的操作感受。</p>
 
                 <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+                <p class="who-am-i">我是誰？</p>
 
                 <h2 class="section-title" id="focusTitle"><span class="section-icon">🎯</span>我專注的領域</h2>
                 <div class="focus-grid" id="focusGrid">
