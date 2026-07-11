@@ -214,6 +214,61 @@ class ParticleSystem {
     }
 }
 
+// ===== 打字機效果 =====
+class Typewriter {
+    constructor(element, cursorElement, texts) {
+        this.element = element;
+        this.cursor = cursorElement;
+        this.texts = texts;
+        this.currentTextIndex = 0;
+        this.charIndex = 0;
+        this.isDeleting = false;
+        this.typeSpeed = 80;
+        this.deleteSpeed = 40;
+        this.pauseTime = 3000;
+    }
+
+    type() {
+        const currentText = this.texts[this.currentTextIndex];
+        if (!this.isDeleting) {
+            this.element.textContent = currentText.substring(0, this.charIndex + 1);
+            this.charIndex++;
+            if (this.charIndex === currentText.length) {
+                if (this.texts.length > 1) { this.isDeleting = true; setTimeout(() => this.type(), this.pauseTime); return; }
+                else { this.cursor.style.display = 'none'; return; }
+            }
+            setTimeout(() => this.type(), this.typeSpeed);
+        } else {
+            this.element.textContent = currentText.substring(0, this.charIndex - 1);
+            this.charIndex--;
+            if (this.charIndex === 0) { this.isDeleting = false; this.currentTextIndex = (this.currentTextIndex + 1) % this.texts.length; }
+            setTimeout(() => this.type(), this.deleteSpeed);
+        }
+    }
+
+    start() { setTimeout(() => this.type(), 1500); }
+}
+
+// ===== 漣漪效果 =====
+class RippleEffect {
+    constructor() { this.init(); }
+    init() {
+        document.querySelectorAll('.ripple').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple-effect');
+                const rect = btn.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+                ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+                btn.appendChild(ripple);
+                ripple.addEventListener('animationend', () => ripple.remove());
+            });
+        });
+    }
+}
+
 // ===== 頁面控制 =====
 class PageManager {
     constructor() {
@@ -249,47 +304,77 @@ class PageManager {
     }
 }
 
-// ===== 彈出視窗 =====
-class ModalManager {
-    constructor() {
-        this.modal = document.getElementById('modalAbout');
-        this.modalClose = document.getElementById('modalClose');
-        this.modalOverlay = this.modal.querySelector('.modal-overlay');
-        this.init();
-    }
-
-    init() {
-        document.querySelectorAll('[data-app="about"]').forEach(btn => {
-            btn.addEventListener('click', () => this.open());
-        });
-        this.modalClose.addEventListener('click', () => this.close());
-        this.modalOverlay.addEventListener('click', () => this.close());
-    }
-
-    open() { this.modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    close() { this.modal.classList.remove('open'); document.body.style.overflow = ''; }
-}
-
 // ===== 語言切換 =====
 class LanguageManager {
     constructor() {
         this.currentLang = 'zh-Hant';
         this.translations = {
             'zh-Hant': {
-                homeBio: 'Developer · Creator',
+                subtitle: 'Developer · Creator',
+                greeting: '嗨，我是 ColdStar。',
+                bio1: '我是 YouTube 的創作者，一位熱愛程式開發與創新的開發者。',
+                bio2: '目前主要專注於 Python 開發、Discord Bot、Roblox Studio 與各種自動化工具的設計與開發，並持續學習新的技術，將想法一步步實現成真正能使用的作品。',
+                bio3: '我喜歡挑戰各種不同類型的專案，從機器人、網站、遊戲到各種工具，享受從零開始規劃、設計、開發到完成的整個過程。我相信每一個專案都是一次成長的機會，也希望透過技術打造出兼具實用性、美感與使用體驗的作品。',
+                bio4: '除了程式開發之外，我也十分重視介面設計與使用者體驗，希望每個作品不只是功能完整，更能帶來流暢、直覺且舒適的操作感受。',
+                focusTitle: '我專注的領域',
+                focusList: ['🤖 Discord Bot 開發','🐍 Python 程式開發','🎮 Roblox Studio','🌐 網站前後端開發','⚡ 自動化工具開發','🎨 UI／UX 介面設計'],
+                philosophyTitle: '我的理念',
+                philosophy1: '我相信技術不只是解決問題，更能創造價值。',
+                philosophy2: '每一次開發都是一次新的挑戰，每一次完成作品都是持續進步的證明。我希望透過不斷學習與實作，打造出穩定、高品質且真正能幫助使用者的作品。',
+                philosophyClosing: '持續學習，持續創造，持續突破。',
                 toastText: 'Discord 已複製：well_xerz'
             },
             'en': {
-                homeBio: 'Developer · Creator',
+                subtitle: 'Developer · Creator',
+                greeting: "Hi, I'm ColdStar.",
+                bio1: "I'm a YouTube creator and a developer passionate about coding and innovation.",
+                bio2: 'Currently focused on Python development, Discord Bots, Roblox Studio, and designing various automation tools. I continuously learn new technologies to turn ideas into real, functional creations.',
+                bio3: 'I enjoy taking on diverse projects — from bots, websites, and games to various tools — relishing the entire journey from planning, designing, and developing to completion. I believe every project is an opportunity to grow, and I strive to create works that blend practicality, aesthetics, and great user experience.',
+                bio4: 'Beyond development, I place great emphasis on interface design and user experience, ensuring each project is not only fully functional but also delivers a smooth, intuitive, and comfortable experience.',
+                focusTitle: 'What I Focus On',
+                focusList: ['🤖 Discord Bot Development','🐍 Python Development','🎮 Roblox Studio','🌐 Full-Stack Web Dev','⚡ Automation Tools','🎨 UI/UX Design'],
+                philosophyTitle: 'My Philosophy',
+                philosophy1: 'I believe technology is not just about solving problems — it creates value.',
+                philosophy2: 'Every development is a new challenge, and every completed project is proof of continuous improvement. Through constant learning and hands-on practice, I aim to build stable, high-quality works that truly help people.',
+                philosophyClosing: 'Keep learning, keep creating, keep breaking through.',
                 toastText: 'Discord copied: well_xerz'
             }
         };
+
+        this.elements = {
+            subtitle: document.getElementById('nameSubtitle'),
+            greeting: document.getElementById('greetingText'),
+            bio1: document.getElementById('bioText1'),
+            bio2: document.getElementById('bioText2'),
+            bio3: document.getElementById('bioText3'),
+            bio4: document.getElementById('bioText4'),
+            focusTitle: document.getElementById('focusTitle'),
+            focusGrid: document.getElementById('focusGrid'),
+            philosophyTitle: document.getElementById('philosophyTitle'),
+            philosophy1: document.getElementById('philosophyText1'),
+            philosophy2: document.getElementById('philosophyText2'),
+            closingText: document.querySelector('.typewriter-text'),
+            closingCursor: document.querySelector('.typewriter-cursor'),
+            toastText: document.querySelector('.toast-text')
+        };
+
         this.buttons = document.querySelectorAll('.lang-btn');
+        this.bioContent = document.getElementById('bioContent');
+        this.typewriter = null;
         this.init();
     }
 
     init() {
         this.buttons.forEach(btn => btn.addEventListener('click', () => this.switchLang(btn.dataset.lang)));
+        this.startTypewriter(this.translations[this.currentLang].philosophyClosing);
+    }
+
+    startTypewriter(text) {
+        this.typewriter = null;
+        this.elements.closingText.textContent = '';
+        this.elements.closingCursor.style.display = 'inline-block';
+        this.typewriter = new Typewriter(this.elements.closingText, this.elements.closingCursor, [text]);
+        this.typewriter.start();
     }
 
     switchLang(lang) {
@@ -297,6 +382,32 @@ class LanguageManager {
         this.buttons.forEach(btn => { btn.classList.remove('active'); btn.setAttribute('aria-checked', 'false'); });
         const activeBtn = document.querySelector(`[data-lang="${lang}"]`);
         activeBtn.classList.add('active'); activeBtn.setAttribute('aria-checked', 'true');
+        this.bioContent.style.opacity = '0';
+        setTimeout(() => {
+            const t = this.translations[lang];
+            this.elements.subtitle.textContent = t.subtitle;
+            this.elements.greeting.textContent = t.greeting;
+            this.elements.bio1.textContent = t.bio1;
+            this.elements.bio2.textContent = t.bio2;
+            this.elements.bio3.textContent = t.bio3;
+            this.elements.bio4.textContent = t.bio4;
+            this.elements.focusTitle.innerHTML = `<span class="section-icon">🎯</span>${t.focusTitle}`;
+            this.elements.philosophyTitle.innerHTML = `<span class="section-icon">💡</span>${t.philosophyTitle}`;
+            this.elements.philosophy1.textContent = t.philosophy1;
+            this.elements.philosophy2.textContent = t.philosophy2;
+            this.elements.toastText.textContent = t.toastText;
+            this.elements.focusGrid.innerHTML = '';
+            t.focusList.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'focus-card';
+                const emoji = item.split(' ')[0];
+                const label = item.substring(emoji.length + 1);
+                card.innerHTML = `<span class="focus-emoji">${emoji}</span><span class="focus-label">${label}</span>`;
+                this.elements.focusGrid.appendChild(card);
+            });
+            this.bioContent.style.opacity = '1';
+            this.startTypewriter(t.philosophyClosing);
+        }, 350);
         document.documentElement.lang = lang;
         this.currentLang = lang;
     }
@@ -328,7 +439,7 @@ class CopyManager {
 document.addEventListener('DOMContentLoaded', () => {
     new ParticleSystem();
     new PageManager();
-    new ModalManager();
     new LanguageManager();
+    new RippleEffect();
     new CopyManager();
 });
