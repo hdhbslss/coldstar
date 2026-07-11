@@ -402,6 +402,30 @@ class CopyManager {
 
 // ===== 初始化 =====
 document.addEventListener('DOMContentLoaded', () => {
+    // Minecraft 載入動畫
+    const mcLoading = document.getElementById('mcLoading');
+    const mcProgressFill = document.getElementById('mcProgressFill');
+    const mcPercent = document.getElementById('mcPercent');
+    let progress = 0;
+
+    document.body.style.overflow = 'hidden';
+
+    const loadingInterval = setInterval(() => {
+        progress += Math.random() * 15 + 5;
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(loadingInterval);
+            mcProgressFill.style.width = '100%';
+            mcPercent.textContent = '100%';
+            setTimeout(() => {
+                mcLoading.classList.add('hide');
+                document.body.style.overflow = '';
+            }, 400);
+        }
+        mcProgressFill.style.width = progress + '%';
+        mcPercent.textContent = Math.floor(progress) + '%';
+    }, 200);
+
     new ParticleSystem();
     new LanguageManager();
     new RippleEffect();
