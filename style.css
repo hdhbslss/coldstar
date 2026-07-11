@@ -87,6 +87,7 @@ body {
     pointer-events: none;
     transition: opacity 0.5s ease, transform 0.5s ease;
     transform: scale(0.95);
+    overflow-y: auto;
 }
 .page.active {
     opacity: 1;
@@ -94,30 +95,32 @@ body {
     transform: scale(1);
 }
 
-/* ===== 首頁 ===== */
-.home-content {
+/* ===== 首頁卡片 ===== */
+.container {
+    width: 100%;
+    max-width: 580px;
+    padding: 40px 24px 60px;
+}
+.card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
+    padding: 48px 40px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
 }
-.home-name {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, var(--text-primary) 0%, rgba(255, 255, 255, 0.75) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-.home-bio {
-    font-size: 0.9rem;
-    color: var(--text-tertiary);
-    font-weight: 500;
-    letter-spacing: 0.08em;
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(100, 181, 246, 0.04);
 }
 
-/* ===== 頭像 ===== */
+/* 頭像 */
 .avatar-wrapper {
     position: relative;
     width: 110px; height: 110px;
@@ -168,6 +171,245 @@ body {
     border-color: rgba(255, 255, 255, 0.25);
 }
 
+/* 名字 */
+.name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.name-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--text-primary) 0%, rgba(255, 255, 255, 0.75) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.name-subtitle {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.name-underline {
+    display: block;
+    width: 44px; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    border-radius: 2px;
+    opacity: 0.7;
+    margin-top: 2px;
+}
+
+/* 介紹內容 */
+.bio-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.bio-greeting {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+.bio-text {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+/* 分隔線 */
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: 16px 0;
+}
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color));
+}
+.divider-line:last-child {
+    background: linear-gradient(90deg, var(--border-color), transparent);
+}
+.divider-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-glow);
+    flex-shrink: 0;
+    animation: dotPulse 3s ease-in-out infinite;
+}
+@keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 8px var(--accent-glow); }
+    50% { box-shadow: 0 0 18px var(--accent), 0 0 30px var(--accent-dim); }
+}
+
+/* 領域 */
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.section-icon {
+    font-size: 1.2rem;
+    animation: iconBounce 2s ease-in-out infinite;
+}
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+.focus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.focus-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    transition: all var(--transition-bounce);
+    cursor: default;
+}
+.focus-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-color);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+.focus-emoji {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: transform var(--transition-bounce);
+}
+.focus-card:hover .focus-emoji { transform: scale(1.25); }
+.focus-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+}
+.focus-card:hover .focus-label { color: var(--text-primary); }
+
+/* 打字機 */
+.philosophy-closing {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.6;
+    text-align: center;
+    margin-top: 6px;
+    letter-spacing: 0.06em;
+    min-height: 1.6em;
+}
+.typewriter-cursor {
+    display: inline-block;
+    animation: cursorBlink 0.8s step-end infinite;
+    font-weight: 300;
+    color: var(--accent);
+}
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* 聯絡連結 */
+.links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4px;
+}
+.link-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all var(--transition-bounce);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-sans);
+}
+.link-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+.link-item:hover {
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.link-item:hover::before { opacity: 1; }
+.link-icon {
+    width: 17px; height: 17px;
+    flex-shrink: 0;
+    transition: transform var(--transition-bounce);
+}
+.link-item:hover .link-icon { transform: scale(1.15); }
+
+.copy-trigger { position: relative; }
+.copy-badge {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+    white-space: nowrap;
+}
+.copy-badge.show { opacity: 1; }
+
+/* 漣漪 */
+.ripple { position: relative; }
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: rippleAnim 0.6s ease-out forwards;
+    pointer-events: none;
+}
+@keyframes rippleAnim {
+    to { transform: scale(4); opacity: 0; }
+}
+
 /* ===== 平板桌面 ===== */
 .desktop-container {
     width: 100%;
@@ -177,7 +419,7 @@ body {
 .desktop-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
     justify-items: center;
 }
 .desktop-app {
@@ -195,26 +437,26 @@ body {
     padding: 8px;
     border-radius: 16px;
 }
-.desktop-app:hover {
-    transform: scale(1.08);
-}
+.desktop-app:hover { transform: scale(1.1); }
 .app-icon {
-    width: 60px; height: 60px;
-    border-radius: 16px;
+    width: 64px; height: 64px;
+    border-radius: 18px;
     background: rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-secondary);
     transition: all var(--transition-fast);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .desktop-app:hover .app-icon {
     background: rgba(255, 255, 255, 0.14);
     color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
-.app-icon svg { width: 28px; height: 28px; }
-.app-icon-red { background: rgba(255, 0, 0, 0.2); color: #ff4444; }
-.app-icon-purple { background: rgba(138, 100, 235, 0.2); color: #8a64eb; }
+.app-icon svg { width: 30px; height: 30px; }
+.app-icon-red { background: rgba(255, 60, 60, 0.2); color: #ff5555; }
+.app-icon-purple { background: rgba(138, 100, 235, 0.2); color: #a78bfa; }
 .app-icon-blue { background: rgba(100, 181, 246, 0.2); color: #64b5f6; }
 .app-label {
     font-size: 0.75rem;
@@ -223,145 +465,37 @@ body {
     text-align: center;
 }
 
-/* ===== 彈出視窗 ===== */
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-smooth);
-}
-.modal.open {
-    opacity: 1;
-    pointer-events: auto;
-}
-.modal-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-.modal-card {
-    position: relative;
-    z-index: 1;
-    width: 90%;
-    max-width: 480px;
-    max-height: 80vh;
-    overflow-y: auto;
-    background: rgba(20, 20, 30, 0.95);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 32px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    transform: translateY(20px) scale(0.95);
-    transition: transform var(--transition-smooth);
-}
-.modal.open .modal-card {
-    transform: translateY(0) scale(1);
-}
-.modal-close {
-    position: absolute;
-    top: 16px; right: 16px;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-fast);
-}
-.modal-close:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: var(--text-primary);
-    transform: rotate(90deg);
-}
-.modal-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-.modal-subtitle {
-    font-size: 0.9rem;
-    color: var(--text-tertiary);
-    margin-bottom: 20px;
-    font-weight: 400;
-}
-.modal-body p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 10px;
-}
-.modal-body h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    margin-top: 4px;
-}
-.modal-divider {
-    height: 1px;
-    background: var(--border-color);
-    margin: 20px 0;
-}
-.modal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-.modal-tags span {
-    padding: 6px 14px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-color);
-    border-radius: 100px;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-/* ===== 導航按鈕 ===== */
+/* ===== 左上角按鈕 ===== */
 .nav-btn {
     position: fixed;
-    top: 28px; right: 28px;
+    top: 28px; left: 28px;
     z-index: 20;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 10px;
+    width: 44px; height: 44px;
+    border-radius: 14px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border-color);
-    border-radius: 14px;
+    color: var(--text-secondary);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all var(--transition-bounce);
 }
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.15);
-    transform: scale(1.05);
+    color: var(--text-primary);
+    transform: scale(1.08);
 }
-.nav-dot {
-    width: 5px; height: 5px;
-    background: var(--text-secondary);
-    border-radius: 50%;
-    transition: all var(--transition-fast);
-}
-.nav-btn:hover .nav-dot { background: var(--text-primary); }
 
 /* ===== 返回按鈕 ===== */
 .back-btn {
     position: fixed;
     top: 28px; left: 28px;
     z-index: 20;
-    width: 40px; height: 40px;
+    width: 44px; height: 44px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border-color);
@@ -449,22 +583,33 @@ body {
 
 /* ===== 響應式 ===== */
 @media (max-width: 640px) {
-    .home-name { font-size: 1.6rem; }
+    .container { padding: 20px 12px 80px; }
+    .card { padding: 32px 20px; gap: 16px; border-radius: 20px; }
+    .name-text { font-size: 1.5rem; }
+    .name-subtitle { font-size: 0.7rem; }
+    .bio-text, .focus-label { font-size: 0.85rem; }
+    .bio-greeting { font-size: 0.95rem; }
+    .section-title { font-size: 0.95rem; }
+    .focus-grid { gap: 8px; }
+    .focus-card { padding: 10px 12px; }
     .avatar-wrapper { width: 90px; height: 90px; }
-    .nav-btn { top: 16px; right: 16px; padding: 8px; gap: 4px; border-radius: 12px; }
-    .nav-dot { width: 4px; height: 4px; }
-    .back-btn { top: 16px; left: 16px; width: 36px; height: 36px; }
-    .desktop-grid { gap: 16px; }
-    .app-icon { width: 52px; height: 52px; border-radius: 14px; }
-    .app-icon svg { width: 24px; height: 24px; }
-    .modal-card { padding: 24px 20px; }
-    .lang-switch { bottom: 20px; right: 50%; transform: translateX(50%); }
     .bg-glow-1 { width: 300px; height: 300px; top: -100px; left: -100px; }
     .bg-glow-2 { width: 250px; height: 250px; bottom: -100px; right: -100px; }
+    .lang-switch { bottom: 20px; right: 50%; transform: translateX(50%); }
+    .links { gap: 8px; }
+    .link-item { padding: 9px 14px; font-size: 0.8rem; }
+    .nav-btn { top: 16px; left: 16px; width: 38px; height: 38px; border-radius: 12px; }
+    .back-btn { top: 16px; left: 16px; width: 38px; height: 38px; }
+    .desktop-grid { gap: 18px; }
+    .app-icon { width: 56px; height: 56px; border-radius: 16px; }
+    .app-icon svg { width: 26px; height: 26px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .avatar-ring-outer, .avatar-ring-inner { animation: none; }
     .bg-glow { animation: none; }
+    .divider-dot { animation: none; }
+    .section-icon { animation: none; }
+    .typewriter-cursor { animation: none; }
     *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
