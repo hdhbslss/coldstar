@@ -269,41 +269,6 @@ class RippleEffect {
     }
 }
 
-// ===== 頁面控制 =====
-class PageManager {
-    constructor() {
-        this.pageHome = document.getElementById('pageHome');
-        this.pageDesktop = document.getElementById('pageDesktop');
-        this.navBtn = document.getElementById('navBtn');
-        this.backBtn = document.getElementById('backBtn');
-        this.currentPage = 'home';
-        this.init();
-    }
-
-    init() {
-        this.navBtn.addEventListener('click', () => this.goTo('desktop'));
-        this.backBtn.addEventListener('click', () => this.goTo('home'));
-    }
-
-    goTo(page) {
-        if (page === this.currentPage) return;
-        this.currentPage = page;
-        if (page === 'desktop') {
-            this.pageHome.classList.remove('active');
-            this.pageDesktop.classList.add('active');
-            this.navBtn.style.opacity = '0';
-            this.navBtn.style.pointerEvents = 'none';
-            this.backBtn.classList.add('show');
-        } else {
-            this.pageDesktop.classList.remove('active');
-            this.pageHome.classList.add('active');
-            this.navBtn.style.opacity = '1';
-            this.navBtn.style.pointerEvents = 'auto';
-            this.backBtn.classList.remove('show');
-        }
-    }
-}
-
 // ===== 語言切換 =====
 class LanguageManager {
     constructor() {
@@ -371,8 +336,8 @@ class LanguageManager {
 
     startTypewriter(text) {
         this.typewriter = null;
-        this.elements.closingText.textContent = '';
-        this.elements.closingCursor.style.display = 'inline-block';
+        if (this.elements.closingText) this.elements.closingText.textContent = '';
+        if (this.elements.closingCursor) this.elements.closingCursor.style.display = 'inline-block';
         this.typewriter = new Typewriter(this.elements.closingText, this.elements.closingCursor, [text]);
         this.typewriter.start();
     }
@@ -438,7 +403,6 @@ class CopyManager {
 // ===== 初始化 =====
 document.addEventListener('DOMContentLoaded', () => {
     new ParticleSystem();
-    new PageManager();
     new LanguageManager();
     new RippleEffect();
     new CopyManager();
