@@ -18,85 +18,103 @@
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
-
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
 
-    <main class="container">
-        <div class="card" id="mainCard">
+    <!-- 頁面 1：首頁 -->
+    <div class="page page-home active" id="pageHome">
+        <main class="home-content">
             <div class="avatar-wrapper">
                 <div class="avatar-ring avatar-ring-outer"></div>
                 <div class="avatar-ring avatar-ring-inner"></div>
                 <div class="avatar-glow"></div>
                 <img src="assets/avatar.png" alt="ColdStar" class="avatar" loading="eager">
             </div>
+            <h1 class="home-name">ColdStar</h1>
+            <p class="home-bio">Developer · Creator</p>
+        </main>
+    </div>
 
-            <h1 class="name" id="nameText">
-                <span class="name-text">ColdStar</span>
-                <span class="name-subtitle" id="nameSubtitle">Developer · Creator</span>
-                <span class="name-underline"></span>
-            </h1>
-
-            <div class="bio-content" id="bioContent">
-                <p class="bio-greeting fade-in" id="greetingText">嗨，我是 ColdStar。</p>
-                <p class="bio-text fade-in" id="bioText1">我是 YouTube 的創作者，一位熱愛程式開發與創新的開發者。</p>
-                <p class="bio-text fade-in" id="bioText2">目前主要專注於 Python 開發、Discord Bot、Roblox Studio 與各種自動化工具的設計與開發，並持續學習新的技術，將想法一步步實現成真正能使用的作品。</p>
-                <p class="bio-text fade-in" id="bioText3">我喜歡挑戰各種不同類型的專案，從機器人、網站、遊戲到各種工具，享受從零開始規劃、設計、開發到完成的整個過程。我相信每一個專案都是一次成長的機會，也希望透過技術打造出兼具實用性、美感與使用體驗的作品。</p>
-                <p class="bio-text fade-in" id="bioText4">除了程式開發之外，我也十分重視介面設計與使用者體驗，希望每個作品不只是功能完整，更能帶來流暢、直覺且舒適的操作感受。</p>
-
-                <div class="divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-                <h2 class="section-title fade-in" id="focusTitle"><span class="section-icon">🎯</span>我專注的領域</h2>
-                <div class="focus-grid" id="focusGrid">
-                    <div class="focus-card"><span class="focus-emoji">🤖</span><span class="focus-label">Discord Bot 開發</span></div>
-                    <div class="focus-card"><span class="focus-emoji">🐍</span><span class="focus-label">Python 程式開發</span></div>
-                    <div class="focus-card"><span class="focus-emoji">🎮</span><span class="focus-label">Roblox Studio</span></div>
-                    <div class="focus-card"><span class="focus-emoji">🌐</span><span class="focus-label">網站前後端開發</span></div>
-                    <div class="focus-card"><span class="focus-emoji">⚡</span><span class="focus-label">自動化工具開發</span></div>
-                    <div class="focus-card"><span class="focus-emoji">🎨</span><span class="focus-label">UI／UX 介面設計</span></div>
+    <!-- 頁面 2：平板桌面 -->
+    <div class="page page-desktop" id="pageDesktop">
+        <div class="desktop-container">
+            <div class="desktop-grid" id="desktopGrid">
+                <div class="desktop-app" data-app="about">
+                    <div class="app-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </div>
+                    <span class="app-label">關於我</span>
                 </div>
-
-                <div class="divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-                <h2 class="section-title fade-in" id="philosophyTitle"><span class="section-icon">💡</span>我的理念</h2>
-                <p class="bio-text fade-in" id="philosophyText1">我相信技術不只是解決問題，更能創造價值。</p>
-                <p class="bio-text fade-in" id="philosophyText2">每一次開發都是一次新的挑戰，每一次完成作品都是持續進步的證明。我希望透過不斷學習與實作，打造出穩定、高品質且真正能幫助使用者的作品。</p>
-                <p class="philosophy-closing" id="philosophyClosing">
-                    <span class="typewriter-text"></span><span class="typewriter-cursor">|</span>
-                </p>
-            </div>
-
-            <div class="links">
-                <a href="https://youtube.com/channel/UCtLMIhyVKz9JzjYGVswl1Uw?si=XNbcf7NZjTe8FDns" class="link-item ripple" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29.94 29.94 0 0 0 1 11.75a29.94 29.94 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29.94 29.94 0 0 0 .46-5.25 29.94 29.94 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-                    <span>YouTube</span>
+                <a href="https://youtube.com/channel/UCtLMIhyVKz9JzjYGVswl1Uw?si=XNbcf7NZjTe8FDns" target="_blank" rel="noopener noreferrer" class="desktop-app">
+                    <div class="app-icon app-icon-red">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    </div>
+                    <span class="app-label">YouTube</span>
                 </a>
-                <button class="link-item copy-trigger" aria-label="Discord" data-copy="well_xerz">
-                    <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-                    <span>well_xerz</span>
-                    <span class="copy-badge">已複製！</span>
-                </button>
-                <a href="mailto:hdhbslss@gmail.com" class="link-item ripple" aria-label="Email">
-                    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <span>hdhbslss@gmail.com</span>
+                <div class="desktop-app copy-trigger" data-copy="well_xerz">
+                    <div class="app-icon app-icon-purple">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    </div>
+                    <span class="app-label">Discord</span>
+                </div>
+                <a href="mailto:hdhbslss@gmail.com" class="desktop-app">
+                    <div class="app-icon app-icon-blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <span class="app-label">Email</span>
                 </a>
             </div>
         </div>
-    </main>
+    </div>
 
+    <!-- 彈出視窗：關於我 -->
+    <div class="modal" id="modalAbout">
+        <div class="modal-overlay"></div>
+        <div class="modal-card" id="modalCard">
+            <button class="modal-close" id="modalClose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <h2 class="modal-title">關於我</h2>
+            <p class="modal-subtitle">我是誰？</p>
+            <div class="modal-body">
+                <p>嗨，我是 ColdStar。</p>
+                <p>我是 YouTube 的創作者，一位熱愛程式開發與創新的開發者。</p>
+                <p>目前主要專注於 Python 開發、Discord Bot、Roblox Studio 與各種自動化工具的設計與開發，並持續學習新的技術，將想法一步步實現成真正能使用的作品。</p>
+                <p>我喜歡挑戰各種不同類型的專案，從機器人、網站、遊戲到各種工具，享受從零開始規劃、設計、開發到完成的整個過程。</p>
+                <p>除了程式開發之外，我也十分重視介面設計與使用者體驗，希望每個作品不只是功能完整，更能帶來流暢、直覺且舒適的操作感受。</p>
+                <div class="modal-divider"></div>
+                <h3>🎯 我專注的領域</h3>
+                <div class="modal-tags">
+                    <span>🤖 Discord Bot</span><span>🐍 Python</span><span>🎮 Roblox Studio</span>
+                    <span>🌐 網站開發</span><span>⚡ 自動化工具</span><span>🎨 UI/UX 設計</span>
+                </div>
+                <div class="modal-divider"></div>
+                <h3>💡 我的理念</h3>
+                <p>我相信技術不只是解決問題，更能創造價值。</p>
+                <p>持續學習，持續創造，持續突破。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右上角按鈕 -->
+    <button class="nav-btn" id="navBtn" aria-label="切換頁面">
+        <span class="nav-dot"></span><span class="nav-dot"></span><span class="nav-dot"></span>
+    </button>
+
+    <!-- 返回按鈕 -->
+    <button class="back-btn" id="backBtn" aria-label="返回首頁">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <!-- Toast -->
     <div class="toast" id="toast"><span class="toast-icon">✅</span><span class="toast-text">Discord 已複製：well_xerz</span></div>
 
+    <!-- 語言切換 -->
     <div class="lang-switch" role="radiogroup" aria-label="語言切換">
         <button class="lang-btn active" data-lang="zh-Hant" role="radio" aria-checked="true">中</button>
         <span class="lang-divider"></span>
         <button class="lang-btn" data-lang="en" role="radio" aria-checked="false">En</button>
     </div>
-
-    <footer class="footer">
-        <p>© 2024 ColdStar</p>
-        <span class="footer-dot">·</span>
-        <p id="footerTagline">持續學習，持續創造，持續突破。</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
